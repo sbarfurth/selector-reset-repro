@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectCount } from './counter.reducer';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'selector-reset-repro';
+  private readonly store = inject(Store);
+
+  readonly count = this.store.selectSignal(selectCount);
 }
